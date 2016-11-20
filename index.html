@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wizard</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/jquery.range.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="script/jquery.range.js"></script>
+    <script src="script/main.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="logo">Wizard</div>
+        <div class="form">
+            <div id="cena" class="step active">
+                <header>Zadejte prosím cenové rozpětí</header>
+                <input type="hidden" class="range-slider" value="23" />
+            </div>
+            <div id="pouziti" class="step"></div>
+            <div id="zaklad" class="step"></div>
+            <div id="hry" class="step"></div>
+            <div id="stanice" class="step"></div>
+            <div id="doladeni" class="step"></div>
+            <div id="dokoncit" class="step"></div>
+            <div class="navigation">
+                <back>Zpět</back>
+                <next>Pokračovat</next>
+                <div style="clear:both; display: none;"></div>
+            </div>
+        </div>
+        <footer>PC Wizard 0.1 &copy; Josef Vacek 2016</footer>
+    </div>
+</body>
+
+</html>

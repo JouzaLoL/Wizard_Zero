@@ -1,0 +1,86 @@
+/* Pallete: http://paletton.com/#uid=33p0u0kiNn68--rdBshntirt4cU */
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+body {
+    font-family: "Raleway", arial, verdana;
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.logo {
+    font-size: 5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form {
+    margin-top: 30px;
+    margin: 0 auto;
+    padding: 15px;
+    border: solid 1px lightgray;
+}
+
+header {
+    font-size: 16px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.navigation {
+    overflow: hidden;
+    text-align: center;
+}
+
+.navigation > * {
+    padding: 4px;
+    font-weight: bold;
+    color: white;
+    background-color: #5C9EAD;
+    border: solid 5px #5C9EAD;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+.navigation > *:hover {
+    background-color: #083240;
+    border: solid 5px #083240;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+next {
+    float: right;
+}
+
+footer {
+    font-size: small;
+    color: darkgrey;
+}
+
+back {
+    float: left;
+    background-color: #80A2AD;
+    border: solid 5px #5C9EAD;
+}
+
+.step {
+    animation: opacity 0.3s ease-in;
+    display: none;
+}
+
+.active {
+    animation: opacity 0.3s ease-in;
+    display: block;
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
