@@ -40,6 +40,29 @@ function registerEvents() {
     button_back.click(previousStep);
 }
 
+
+
+/**
+ * Hides or shows the Back button. Triggered whenever the currentIndex changes.
+ */
+function onFormChange() {
+    if (currentIndex === 0) {
+        if (!$('back').hasClass('hidden')) {
+            $('back').addClass('hidden');
+        }
+        if ($('back').hasClass('visible')) {
+            $('back').removeClass('visible');
+        }
+    } else {
+        if (!$('back').hasClass('visible')) {
+            $('back').addClass('visible');
+        }
+        if ($('back').hasClass('hidden')) {
+            $('back').removeClass('hidden');
+        }
+    }
+}
+
 /**
  * Gets and stores all the steps in the @var steps
  * 
@@ -68,6 +91,7 @@ function nextStep() {
     $(steps[currentIndex]).removeClass('active'); //Need to convert to jQuery element first, in order to use .removeClass();
     $(steps[currentIndex + 1]).addClass('active');
     currentIndex++;
+    onFormChange();
 }
 
 function previousStep() {
@@ -78,6 +102,8 @@ function previousStep() {
     $(steps[currentIndex]).removeClass('active'); //Need to convert to jQuery element first, in order to use .removeClass();
     $(steps[currentIndex - 1]).addClass('active');
     currentIndex--;
+    onFormChange();
+
 }
 
 /* =================== END NAVIGATION/STEPS =================== */
