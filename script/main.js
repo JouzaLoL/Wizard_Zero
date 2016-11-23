@@ -38,14 +38,37 @@ function registerEvents() {
     button_back = $('back');
     button_next.click(nextStep);
     button_back.click(previousStep);
+
+    $('select').on('change', onSelect);
 }
 
+function onSelect() {
+    var value = $(this).val();
 
+    if (value === null) { //User didn't select category, prompt him to select one.
+        alert("Vyberte prosím kategorii");
+        return;
+    }
+
+    $('.' + value) //Select the selected category
+        .removeClass(value) //Remove the temp class, show the element
+        .addClass('step'); //Add class step so we are able to cache it
+
+    getSteps(); //Readd all the steps
+
+    //Show the next button
+    if ($('next').hasClass('hidden')) {
+        $('back').removeClass('hidden');
+        $('next').addClass('visible');
+    }
+}
 
 /**
- * Hides or shows the Back button. Triggered whenever the currentIndex changes.
+ * Triggered when currentIndex changes
  */
 function onFormChange() {
+
+    //Auto hide Back button
     if (currentIndex === 0) {
         if (!$('back').hasClass('hidden')) {
             $('back').addClass('hidden');
@@ -61,6 +84,20 @@ function onFormChange() {
             $('back').removeClass('hidden');
         }
     }
+
+    //Hide the Next button if selecting machine use, will be shown when user has Selected an option - onSelect()
+    if (getCurrentStep().attr('id') === "pouziti") {
+        if ($('next').hasClass('visible')) {
+            $('next').removeClass('visible');
+            $('next').addClass('hidden');
+        }
+    } else {
+        if ($('next').hasClass('hidden')) {
+            $('next').removeClass('hidden');
+            $('next').addClass('visible');
+        }
+    }
+
 }
 
 /**

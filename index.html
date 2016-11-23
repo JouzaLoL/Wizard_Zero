@@ -22,19 +22,34 @@
             <div id="pouziti" class="step">
                 <header>Na co plánujete počítač používat?</header>
                 <select name="" id="">
-                    <option value="basic">Základí použití - Internet, Email, Office</option>
+                    <option value="default"></option>
+                    <option value="basic">Základní použití - Internet, Email, Office</option>
                     <option value="gaming">Hraní her</option>
                     <option value="workstation">3D grafiku, Virtualizace, Náročené aplikace</option>
                 </select>
             </div>
-            <div id="zaklad" class="step"></div>
-            <div id="hry" class="step"></div>
-            <div id="stanice" class="step"></div>
+            <div id="zaklad" class="basic">
+                <header>Pojďme váš počítač přizpůsobit vaším představám..</header>
+                <checkbox>
+                    <input type="checkbox" name="hard_disk" value="hdd"> Plánuji na počítači uchovávat velké množství dat
+                    (250GB+)
+                </checkbox>
+                <checkbox>
+                    <input type="checkbox" name="hard_disk" value="hdd"> Plánuji na počítači uchovávat velké množství dat
+                    (250GB+)
+                </checkbox>
+                <checkbox>
+                    <input type="checkbox" name="hard_disk" value="hdd"> Plánuji na počítači uchovávat velké množství dat
+                    (250GB+)
+                </checkbox>
+            </div>
+            <div id="hry" class="gaming"></div>
+            <div id="stanice" class="workstation"></div>
             <div id="doladeni" class="step"></div>
             <div id="dokoncit" class="step"></div>
             <div class="navigation">
                 <back class="hidden">Zpět</back>
-                <next>Pokračovat</next>
+                <next class="visible">Pokračovat</next>
                 <div style="clear:both; display: none;"></div>
             </div>
         </div>

@@ -103,12 +103,24 @@ back {
     }
 }
 
+.basic, .gaming, .workstation {
+    display: none;
+}
+
 .hidden {
     opacity: 0;
     transition: 0.5s;
+    pointer-events: none; /* Forbid the user from clicking on the hidden button */
 }
 
 .visible {
     opacity: 1;
     transition: 0.5s;
+    pointer-events: initial; /* Reenable clicking */
+
+}
+
+checkbox {
+    display: block;
+    font-size: 13px;
 }
