@@ -42,6 +42,10 @@ function registerEvents() {
     $('select').on('change', onSelect);
 }
 
+
+/**
+ * Triggered whenever the user selects something in the Machine Use slide;
+ */
 function onSelect() {
     var value = $(this).val();
 
@@ -64,7 +68,7 @@ function onSelect() {
 }
 
 /**
- * Triggered when currentIndex changes
+ * Slide-specific logic goes here
  */
 function onFormChange() {
 
@@ -85,7 +89,15 @@ function onFormChange() {
         }
     }
 
-    //Hide the Next button if selecting machine use, will be shown when user has Selected an option - onSelect()
+    // "There's no going back..", hide the Back button after the user has selected Machine Use
+    if (currentIndex > 1) {
+        if ($('back').hasClass('visible')) {
+            $('back').removeClass('visible');
+            $('back').addClass('hidden');
+        }
+    }
+
+    //Hide the Next button if selecting Machine Use, will be shown when user has Selected an option - onSelect()
     if (getCurrentStep().attr('id') === "pouziti") {
         if ($('next').hasClass('visible')) {
             $('next').removeClass('visible');
@@ -97,7 +109,6 @@ function onFormChange() {
             $('next').addClass('visible');
         }
     }
-
 }
 
 /**
@@ -144,3 +155,37 @@ function previousStep() {
 }
 
 /* =================== END NAVIGATION/STEPS =================== */
+
+/* =================== BEGIN MAGIC =================== */
+
+
+//Basic data format
+var data = {
+    price: [{
+        min: 0,
+        max: 0
+    }],
+    use: 1, //1 - Basic, 2 - Gaming, 3 - Workstation
+    basic: {
+        hard_disk: false //True - HDD + SSD, False - just SSD
+    },
+    gaming: {
+        vr: true,
+        fourk: true
+    },
+    workstation: {
+        hard_disk: false, //True - HDD + SSD, False - just SSD
+        virtualization: true,
+        graphics
+    },
+    misc: {
+        wifi: true
+    }
+};
+
+/**
+ * Pulls the data from the slides and stores them in an object
+ */
+function getData() {
+
+}
