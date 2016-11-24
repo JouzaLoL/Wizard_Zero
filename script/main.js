@@ -58,7 +58,10 @@ function onSelect() {
         .removeClass(value) //Remove the temp class, show the element
         .addClass('step'); //Add class step so we are able to cache it
 
-    getSteps(); //Readd all the steps
+    getSteps(); //Update the steps
+
+    //Make the select box nonclickable.
+    $(this).addClass('nonclickable');
 
     //Show the next button
     if ($('next').hasClass('hidden')) {
