@@ -13,7 +13,7 @@
 
 <body>
     <div id="wrapper">
-        <div class="logo">Wizard</div>
+        <div class="logo">Wizard Hero</div>
         <div class="form">
             <div id="cena" class="step active">
                 <header>Zadejte prosím cenové rozpětí</header>
@@ -31,29 +31,46 @@
             <div id="zaklad" class="basic">
                 <header>Pojďme váš počítač přizpůsobit vaším představám..</header>
                 <checkbox>
-                    <input type="checkbox" name="hard_disk" value="hdd"> Plánuji na počítači uchovávat velké množství dat
-                    (250GB+)
-                </checkbox>
-                <checkbox>
-                    <input type="checkbox" name="hard_disk" value="hdd"> Plánuji na počítači uchovávat velké množství dat
-                    (250GB+)
-                </checkbox>
-                <checkbox>
-                    <input type="checkbox" name="hard_disk" value="hdd"> Plánuji na počítači uchovávat velké množství dat
+                    <input type="checkbox" name="hard_disk" value="true"> Plánuji na počítači uchovávat velké množství dat
                     (250GB+)
                 </checkbox>
             </div>
-            <div id="hry" class="gaming"></div>
-            <div id="stanice" class="workstation"></div>
-            <div id="doladeni" class="step"></div>
+            <div id="hry" class="gaming">
+                <header>Pojďme váš počítač přizpůsobit vaším představám..</header>
+                <checkbox>
+                    <input type="checkbox" name="vr" value="true"> Chci virtuální realitu
+                </checkbox>
+                <checkbox>
+                    <input type="checkbox" name="4k" value="true"> Hraju jedině ve 4K HD
+                </checkbox>
+            </div>
+            <div id="stanice" class="workstation">
+                <header>Pojďme váš počítač přizpůsobit vaším představám..</header>
+                <checkbox>
+                    <input type="checkbox" name="hard_disk" value="true"> Plánuji na počítači uchovávat velké množství dat
+                    (250GB+)
+                </checkbox>
+                <checkbox>
+                    <input type="checkbox" name="virtualization" value="true"> Pracuji s virtuálními počítači / servery
+                </checkbox>
+                <checkbox>
+                    <input type="checkbox" name="graphics" value="true"> Moje práce zahrnuje práci s 3D grafikou, úpravu
+                    klipů, CAD atd.
+                </checkbox>
+            </div>
+            <div id="doladeni" class="step">
+                <checkbox>
+                    <input type="checkbox" name="wifi" value="true"> K internetu se chci připojovat bezdrátově
+                </checkbox>
+            </div>
             <div id="dokoncit" class="step"></div>
             <div class="navigation">
                 <back class="hidden">Zpět</back>
                 <next class="visible">Pokračovat</next>
                 <div style="clear:both; display: none;"></div>
             </div>
+            <footer>PC Wizard Hero Beta &copy; Josef Vacek 2016</footer>
         </div>
-        <footer>PC Wizard 0.1 &copy; Josef Vacek 2016</footer>
     </div>
 </body>
 
