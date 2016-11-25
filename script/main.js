@@ -4,9 +4,18 @@ $(document).ready(function () {
     registerEvents();
 });
 
+
+//Global variables
+var steps = [];
+var currentIndex = 0;
+var slider;
+
+/**
+ * Setup the Range slider
+ */
 function setUpStyles() {
 
-    $('.range-slider').jRange({
+    slider = $('.range-slider').jRange({
         from: 0,
         to: 30000,
         step: 1000,
@@ -25,23 +34,15 @@ function setUpStyles() {
 
 /* =================== BEGIN NAVIGATION/STEPS =================== */
 
-//Global variables
-var steps = [];
-var currentIndex = 0;
-
-//Buttons
-var button_next;
-var button_back;
-
+/**
+ * Register the events for the navigation
+ */
 function registerEvents() {
-    button_next = $('next');
-    button_back = $('back');
-    button_next.click(nextStep);
-    button_back.click(previousStep);
-
-    $('select').on('change', onSelect);
+    $('next').click(nextStep);
+    $('back').click(previousStep);
+    $('select').change(onSelect);
+    $('finish').click(finish);
 }
-
 
 /**
  * Triggered whenever the user selects something in the Machine Use slide;
@@ -112,6 +113,14 @@ function onFormChange() {
             $('next').addClass('visible');
         }
     }
+
+    //Hide the Next button if selecting Machine Use, will be shown when user has Selected an option - onSelect()
+    if (getCurrentStep().attr('id') === "dokoncit") {
+        if ($('next').hasClass('visible')) {
+            $('next').removeClass('visible');
+            $('next').addClass('hidden');
+        }
+    }
 }
 
 /**
@@ -163,12 +172,12 @@ function previousStep() {
 
 
 //Basic data format
-var data = {
-    price: [{
+var DataFormat = {
+    price: {
         min: 0,
         max: 0
-    }],
-    use: 1, //1 - Basic, 2 - Gaming, 3 - Workstation
+    },
+    use: "default",
     basic: {
         hard_disk: false //True - HDD + SSD, False - just SSD
     },
@@ -179,16 +188,49 @@ var data = {
     workstation: {
         hard_disk: false, //True - HDD + SSD, False - just SSD
         virtualization: true,
-        graphics
+        graphics: true,
     },
     misc: {
         wifi: true
     }
 };
 
-/**
- * Pulls the data from the slides and stores them in an object
- */
-function getData() {
 
+/**
+ * Pull the data from the slides and stored them in an object
+ * 
+ * @returns A DataFormat object with the data
+ */
+function parseData() {
+    var data = new DataFormat;
+
+    var $price = $('.range-slider')[0].value.split(',');
+    data.price.min = $price[0];
+    data.price.max = $price[1];
+
+    var $use = $('select')[0];
+    data.use = $use.options[$use.selectedIndex].value;
+
+    data.basic.hard_disk = $('input[name="hard_disk"]')[0].value;
+
+    data.gaming.vr = $('input[name="vr"]')[0].value;
+    data.gaming.fourk = $('input[name="4k"]')[0].value;
+
+    data.workstation.hard_disk = $('input[name="hard_disk"]')[0].value;
+    data.workstation.virtualization = $('input[name="virtualization"]')[0].value;
+    data.workstation.graphics = $('input[name="graphics"]')[0].value;
+
+    data.misc.wifi = $('input[name="wifi"]')[0].value;
+
+    return data;
+}
+
+
+
+/**
+ * Finish the wizard, submit results and redirect user
+ */
+function finish() {
+    $.post("url_to_post_to", parseData()); //post the data to the url
+    $(location).attr("href", "url_to_redirect_to"); //redirect the user
 }

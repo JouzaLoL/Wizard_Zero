@@ -50,7 +50,6 @@ select {
     overflow: hidden;
     text-align: center;
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .navigation>* {
@@ -133,4 +132,25 @@ checkbox {
 .nonclickable {
     /* Forbid the user from selecting another Machine Use */
     pointer-events: none;
+}
+
+#dokoncit {
+    text-align: center;
+}
+
+finish {
+    padding: 4px;
+    font-weight: bold;
+    color: white;
+    background-color: #537F8D;
+    border: solid 5px #537F8D;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+finish:hover {
+    background-color: #083240;
+    border: solid 5px #083240;
+    cursor: pointer;
+    transition: 0.5s;
 }
