@@ -173,27 +173,9 @@ function previousStep() {
 
 //Basic data format
 var DataFormat = {
-    price: {
-        min: 0,
-        max: 0
-    },
-    use: "default",
-    basic: {
-        hard_disk: null, //True - HDD + SSD, False - just SSD
-        silent: null
-    },
-    gaming: {
-        vr: null,
-        fourk: null
-    },
-    workstation: {
-        hard_disk: null, //True - HDD + SSD, False - just SSD
-        virtualization: null,
-        graphics: null,
-    },
-    misc: {
-        wifi: null
-    }
+    price: [0, 1],
+    use: 1, //0 - basic, 1 - gaming, 2 - workstation
+    tags: [] //hdd, vr, fourk, virt, gfx, wifi, silent
 };
 
 
@@ -206,23 +188,39 @@ function parseData() {
     var data = DataFormat;
 
     var $price = $('.range-slider')[0].value.split(',');
-    data.price.min = $price[0];
-    data.price.max = $price[1];
+    data.price[0] = $price[0];
+    data.price[1] = $price[1];
 
     var $use = $('select')[0];
-    data.use = $use.options[$use.selectedIndex].value;
+    data.use = $use.selectedIndex-1;
 
-    data.basic.hard_disk = $('input[name="hard_disk"]')[0].value;
-    data.basic.silent = $('input[name="silent"]')[0].value;
+    if (($('input[name="hard_disk"]')[0].value || $('input[name="hard_disk"]')[0].value) === true) {
+        data.tags.push("hdd");
+    }
 
-    data.gaming.vr = $('input[name="vr"]')[0].value;
-    data.gaming.fourk = $('input[name="4k"]')[0].value;
+    if ($('input[name="silent"]')[0].value === true) {
+        data.tags.push("silent")
+    }
 
-    data.workstation.hard_disk = $('input[name="hard_disk"]')[0].value;
-    data.workstation.virtualization = $('input[name="virtualization"]')[0].value;
-    data.workstation.graphics = $('input[name="graphics"]')[0].value;
+    if ($('input[name="vr"]')[0].value === true) {
+        data.tags.push("vr")
+    }
 
-    data.misc.wifi = $('input[name="wifi"]')[0].value;
+    if ($('input[name="4k"]')[0].value === true) {
+        data.tags.push("fourk")
+    }
+
+    if ($('input[name="virtualization"]')[0].value === true) {
+        data.tags.push("virt")
+    }
+
+    if ($('input[name="graphics"]')[0].value === true) {
+        data.tags.push("gfx")
+    }
+
+    if ($('input[name="wifi"]')[0].value === true) {
+        data.tags.push("wifi")
+    }
 
     return JSON.stringify(data);
 }
@@ -233,13 +231,24 @@ function parseData() {
  * Finish the wizard, submit results and redirect user
  */
 function finish() {
-    $.post("http://wizard.aspone.cz/api/rig/", 
-    parseData(),
-    function (data, status) {
-        console.log("Status:", status);
-        console.log('Result:', data);
+
+    var data = parseData();
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:58997/api/rig/",
+        data: data,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success:  function (data, status) {
+            console.log("Status:", status);
+            console.log('Result:', data);
+        },
+        failure: function (errMsg) {
+            alert(errMsg);
+        }
     });
+
     //$(location).attr("href", "url_to_redirect_to"); //redirect the user
     $('footer').append(JSON.stringify(parseData(), null, 4));
-    
+
 }
