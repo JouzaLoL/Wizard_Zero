@@ -179,19 +179,20 @@ var DataFormat = {
     },
     use: "default",
     basic: {
-        hard_disk: false //True - HDD + SSD, False - just SSD
+        hard_disk: null, //True - HDD + SSD, False - just SSD
+        silent: null
     },
     gaming: {
-        vr: true,
-        fourk: true
+        vr: null,
+        fourk: null
     },
     workstation: {
-        hard_disk: false, //True - HDD + SSD, False - just SSD
-        virtualization: true,
-        graphics: true,
+        hard_disk: null, //True - HDD + SSD, False - just SSD
+        virtualization: null,
+        graphics: null,
     },
     misc: {
-        wifi: true
+        wifi: null
     }
 };
 
@@ -202,7 +203,7 @@ var DataFormat = {
  * @returns A DataFormat object with the data
  */
 function parseData() {
-    var data = new DataFormat;
+    var data = DataFormat;
 
     var $price = $('.range-slider')[0].value.split(',');
     data.price.min = $price[0];
@@ -211,7 +212,8 @@ function parseData() {
     var $use = $('select')[0];
     data.use = $use.options[$use.selectedIndex].value;
 
-    data.basic.hard_disk = $('input[name="hard_disk"]')[0].value;
+    data.basic.hard_disk = $('input[name="hard_disk"]')[0].value;silent
+    data.basic.silent = $('input[name="silent"]')[0].value;
 
     data.gaming.vr = $('input[name="vr"]')[0].value;
     data.gaming.fourk = $('input[name="4k"]')[0].value;
@@ -222,7 +224,7 @@ function parseData() {
 
     data.misc.wifi = $('input[name="wifi"]')[0].value;
 
-    return data;
+    return JSON.stringify(data);
 }
 
 
@@ -231,6 +233,13 @@ function parseData() {
  * Finish the wizard, submit results and redirect user
  */
 function finish() {
-    $.post("url_to_post_to", parseData()); //post the data to the url
-    $(location).attr("href", "url_to_redirect_to"); //redirect the user
+    $.post("wizard.aspone.cz/api/rig/", 
+    parseData(),
+    function (data, status) {
+        console.log("Status:", status);
+        console.log('Result:', data);
+    });
+    //$(location).attr("href", "url_to_redirect_to"); //redirect the user
+    $('footer').append(JSON.stringify(parseData(), null, 4));
+    
 }
