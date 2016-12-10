@@ -233,7 +233,7 @@ function parseData() {
  * Finish the wizard, submit results and redirect user
  */
 function finish() {
-    $.post("wizard.aspone.cz/api/rig/", 
+    $.post("http://wizard.aspone.cz/api/rig/", 
     parseData(),
     function (data, status) {
         console.log("Status:", status);
