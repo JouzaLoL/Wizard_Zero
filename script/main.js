@@ -212,7 +212,7 @@ function parseData() {
     var $use = $('select')[0];
     data.use = $use.options[$use.selectedIndex].value;
 
-    data.basic.hard_disk = $('input[name="hard_disk"]')[0].value;silent
+    data.basic.hard_disk = $('input[name="hard_disk"]')[0].value;
     data.basic.silent = $('input[name="silent"]')[0].value;
 
     data.gaming.vr = $('input[name="vr"]')[0].value;
