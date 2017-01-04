@@ -1,3 +1,4 @@
+#OBSOLETE: See WizardOne
 # Wizard_Zero
 Front-end for the Wizard project.
 
